@@ -20,6 +20,9 @@ type Query {
 
     posts: [Post!]! @paginate(defaultCount: 10) @orderBy(column: "created_at", direction: DESC)
     post(id: ID!): Post @find
+
+    postsResolver: [Post!]! @field(resolver: "App\\GraphQL\\Queries\\PostsResolver")
+    postResolver(id: ID!): Post
 }
 
 type Mutation {
