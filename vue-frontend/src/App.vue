@@ -33,6 +33,30 @@ onMounted(() => {
       posts.value = result.data.posts.data
     });
 });
+
+const handleMutation = () => {
+  fetch('http://localhost/graphql', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      query: `
+        mutation {
+          createPost(user_id: 1, title: "Hello from Vue", body: "Nail tech knows how to keep a lil secret"){
+              id
+              title
+              body
+          }
+        }
+      `
+    }),
+  })
+    .then(res => res.json())
+    .then(result => {
+      alert("Post created!")
+    });
+}
 </script>
 
 <template>
@@ -48,6 +72,7 @@ onMounted(() => {
   <ul>
     <li v-for="post in posts" :key="post.id">{{ post.title }}</li>
   </ul>
+  <button @click="handleMutation">Create hardcoded post</button>
 </template>
 
 <style scoped>
