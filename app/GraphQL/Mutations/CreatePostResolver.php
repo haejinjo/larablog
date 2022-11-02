@@ -17,6 +17,7 @@ final class CreatePostResolver
             'title' => $args['title'],
             'body' => $args['body'],
         ]);
+        
 
         Log::info('action taken after post created');
 
